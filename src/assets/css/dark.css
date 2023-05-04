@@ -1,0 +1,60 @@
+.bg-dark {
+    /* background-color: dimgrey; */
+    transition: .7s ease;
+}
+
+.bg-light {
+    /* background-color: dimgrey; */
+    transition: .7s ease;
+}
+
+.bg-body {
+    transition: .7s ease;
+}
+
+.nav-link-dark {
+    color: rgb(141, 141, 141) !important;
+}
+
+.aboutText-dark {
+    color: rgb(110, 110, 110) !important;
+    text-align: center;
+}
+
+.page-link-dark {
+    background-color: dimgrey !important;
+    color: rgb(156, 156, 156) !important;
+    /* border: 0; */
+}
+
+.page-item.active .page-link-dark {
+    background-color: #7188a9;
+    border-color: #7188a9;
+}
+
+.toolsCard {
+    transition: .7s ease;
+}
+
+.text-dark {
+    color: rgb(190, 190, 190) !important;
+    transition: .7s ease;
+}
+
+.text-body {
+    transition: .7s ease;
+}
+.text-light{
+    transition: .7s ease;
+}
+.text-muted {
+    transition: .7s ease;
+}
+
+.createInfo-dark {
+    color: rgb(221, 221, 221) !important;
+}
+
+.border-dark {
+    border-color: #999999 !important;
+}
