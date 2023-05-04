@@ -28,7 +28,8 @@
                     <div class="col-md-4 d-flex justify-content-center">
                         <img :src="d.imageSrc" class="cardImg rounded-3" alt=""
                             v-if="d.imageSrc != null && d.imageSrc != '' && d.imageSrc != undefined">
-                        <img src="https://lyz0613.top/server/image/null2.png" class="cardImg rounded-3" alt="" v-else>
+                        <img src="../../public/image/暂无图片.png" class="cardImg rounded-3" alt="" v-else>
+                        
                     </div>
                 </div>
                 <div class="mt-3 d-flex justify-content-between"

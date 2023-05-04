@@ -48,7 +48,7 @@
                     粤公网安备44120302000081号
                 </a>
             </div>
-            <div class="text-center text-muted">&copy; 2022 lyz</div>
+            <div class="text-center text-muted">&copy; 2023 lyz</div>
         </div>
     </div>
 </template>
