@@ -4,7 +4,7 @@
             data-bs-html="true" data-bs-content="<div>
                     <img src='https://lyz0613.top/server/image/null2.png' class='img-fluid' height='50' width='50'/>
                     <span>username</span>
-                    <div>簡介</div>
+                    <div>简介</div>
                 </div>">Dismissible popover</a>
     </div> -->
     <div class="card" :class="{'showCard': showCard, 'hideCard': !showCard,'bg-secondary': darkMode,'bg-light': !darkMode}">
@@ -19,7 +19,7 @@
                     class="bi bi-shield-fill"></i>正式用户</span>
             <span class="userType ms-3 text-danger" v-else-if="userInfo.userType == 0"><i
                     class="bi bi-shield-slash-fill"></i>封禁用户</span>
-            <!-- <div class="userDesc">簡介</div> -->
+            <!-- <div class="userDesc">简介</div> -->
         </div>
         <div class="pub m-3 d-flex justify-content-center" :class="{'text-dark':darkMode,'text-body':!darkMode}">
             <div class="mx-auto">文章<span class="mx-2 text-black-50">0</span></div>

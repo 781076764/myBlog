@@ -2,7 +2,7 @@
     <div class="login">
         <main class="form-signin text-center">
             <div>
-                <img class="mb-4" src="https://lyz0613.top/server/image/manager.png" alt="" width="70" height="70">
+                <!-- <img class="mb-4" src="https://lyz0613.top/server/image/manager.png" alt="" width="70" height="70"> -->
                 <h1 class="h3 mb-3 fw-normal" :class="{'text-dark':darkMode,'text-body':!darkMode}">管理员登录</h1>
 
                 <div class="form-floating my-3">

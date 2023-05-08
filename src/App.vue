@@ -137,6 +137,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  .content {
+        margin: 5% 10%;
+    }
 
   .img-dark img {
     filter: brightness(80%);

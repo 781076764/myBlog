@@ -37,6 +37,12 @@ const routes = [
         component: () => import('../components/adminLogin.vue'),
         meta: { transition: 'bounce' },
     },
+    {
+        name: 'createPage',
+        path: '/createPage',
+        component: () => import('../components/createPage.vue'),
+        meta: { transition: 'bounce' },
+    },
     //后台管理页面
     {
         name: 'managerIndex',

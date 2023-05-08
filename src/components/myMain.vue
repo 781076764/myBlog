@@ -2,7 +2,7 @@
     <div class="container-fluid indexBk d-flex">
         <video autoplay loop muted="true" webkit-playsinline playsinline x5-video-player-type="h5-page"
             ref="videoPlayer" style="z-index:1;">
-            <source src="../assets/video/background.mp4" type="video/mp4" />
+            <source src="https://cdn.jsdelivr.net/gh/781076764/cdn/background.mp4" type="video/mp4" />
         </video>
         <div class="align-self-center flex-fill text-center titleContainer" style="z-index: 2;">
             <div class="titleText">
@@ -67,7 +67,7 @@
         /* background-image: url("https://api.kdcc.cn/img/bingimg/2020/12/10.jpg"); */
         /* background-image: url("https://api.kdcc.cn"); */
         /* background-image: url("https://api.kdcc.cn/img/bingimg/2022/02/02.jpg"); */
-        background-image: url('../assets/image/background.jpg');
+        background-image: url('https://cdn.jsdelivr.net/gh/781076764/cdn/background.jpg');
         background-size: cover;
         height: 100%;
         /* width: 100%; */
