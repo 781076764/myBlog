@@ -19,7 +19,7 @@
                     <div class="card h-100 pt-3 toolsCard" :class="{'bg-secondary': darkMode,'bg-light': !darkMode}">
                         <img :src="d.imageSrc" class="rounded-3 align-self-center cardImg" alt=""
                             v-if="d.imageSrc != null && d.imageSrc != '' && d.imageSrc != undefined">
-                        <img src="https://lyz0613.top/server/image/null2.png"
+                        <img src='../../public/image/暂无图片.png'
                             class="cardImg rounded-3 align-self-center" alt="" width="" height="" v-else>
 
                         <div class="card-body">

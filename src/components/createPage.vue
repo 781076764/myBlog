@@ -1,14 +1,16 @@
 <template lang="">
     <div class="content">
-        {{createType}}
         <div class="card-body m-2 m-lg-5" v-if="createType == 'article'">
+            <div class="text-center mb-4 mt-3 fs-4 fw-bold">
+                投稿文章
+            </div>
         <div class="form-floating mb-3">
             <input type="text" class="form-control" placeholder="文章标题" v-model="tempData.title"
                 :class="{'is-invalid': errorTips.title}">
             <label for="floatingInput">文章标题</label>
         </div>
         <div class="form-floating my-3">
-            <input type="text" class="form-control" placeholder="作者" v-model="tempData.createUser">
+            <input type="text" class="form-control" placeholder="作者" :value="tempData.createUser" disabled>
             <label for="floatingInput">作者</label>
         </div>
         <div class="textMain row my-2 mt-3 mt-lg-0">
@@ -17,8 +19,8 @@
                     :class="{'is-invalid': errorTips.text}"></textarea>
                 <label for="floatingInput">正文内容(发布后自动处理代码高亮)</label>
             </div>
-            <div class="image align-self-center col-lg-3 my-3">
-                <img :src="tempData.imageSrc == null || tempData.imageSrc == ''? 'https://lyz0613.top/server/image/null2.png': tempData.imageSrc"
+            <div class="image align-self-center col-lg-3 my-3 text-center">
+                <img :src="tempData.imageSrc == null || tempData.imageSrc == ''? '../../public/image/暂无图片.png': tempData.imageSrc"
                     class="image">
                 <div class="m-3">
                     <input class="form-control form-control-sm" id="formFileSm" type="file" ref="upImgInput"
@@ -53,14 +55,16 @@
     </div>
 </template>
 <script setup>
-import { ref, watch, getCurrentInstance } from 'vue'
+import { ref, computed, watch, getCurrentInstance } from 'vue'
 import { useRoute } from "vue-router"
 import { VueCookieNext } from 'vue-cookie-next'
+import { useStore } from 'vuex'
 import COS from 'cos-js-sdk-v5'
 import Qs from 'qs'
 import axios from 'axios'
 const { $bus } = getCurrentInstance().appContext.config.globalProperties
 const route = useRoute()
+const store = useStore()
 const createType = ref(route.query.createType)
 watch(
     () => route.query.createType,
@@ -74,7 +78,7 @@ const tempData = ref({
     downloadName: '',
     downloadDesc: '',
     downloadSrc: '',
-    createUser: '',
+    createUser: computed(()=> store.state.userInfo.userName),
     session: VueCookieNext.getCookie('session')
 })
 const uploadSuccess = ref(false)
@@ -87,8 +91,9 @@ const errorTips = ref({
     downloadSrc: false,
     createUser: false
 })
+const upImgInput = ref()
 function upLoadImg() {
-    var file = ref.upImgInput.files[0];
+    var file = upImgInput.value.files[0];
     // 初始化实例
     var cos = new COS({
         getAuthorization: function (options, callback) {
@@ -128,9 +133,13 @@ function upLoadImg() {
             }
         }, function (err, data) {
             if (data.statusCode == '200') {
-                that.tempData.value.imageSrc = "https://" + data.Location
+                tempData.value.imageSrc = "https://" + data.Location
                 //给地址输入框添加成功的样式
-                that.uploadSuccess = true
+                uploadSuccess.value = true
+                $bus.emit("showMessage", {
+                    msg: '图片上传成功',
+                    type: 'success'
+                })
             } else {
                 console.log(err)
             }
@@ -143,11 +152,14 @@ function handleAddBlog() {
     if (tempData.value.title != '' && tempData.value.title != null && tempData.value.text != '' && tempData.value.text != null) {
         axios({
             method: 'post',
-            url: '/blogAdd.php',
+            url: '/createBlog.php',
             data: Qs.stringify(tempData.value)
         }).then((res) => {
             if (res.data == 1) {
-                $bus.emit("showMessage", '提交成功，等待审核')
+                $bus.emit("showMessage", {
+                    msg: '提交成功，等待审核',
+                    type: 'success'
+                })
                 uploadSuccess.value = false
                 tempData.value = {
                     title: '',
@@ -169,7 +181,10 @@ function handleAddBlog() {
                     createUser: false
                 }
             } else {
-                $bus.emit("showMessage", res.data)
+                $bus.emit("showMessage", {
+                    msg: res.data,
+                    type: "error"
+                })
             }
         })
     }

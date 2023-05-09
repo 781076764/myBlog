@@ -29,13 +29,12 @@
                         <img :src="d.imageSrc" class="cardImg rounded-3" alt=""
                             v-if="d.imageSrc != null && d.imageSrc != '' && d.imageSrc != undefined">
                         <img src="../../public/image/暂无图片.png" class="cardImg rounded-3" alt="" v-else>
-                        
                     </div>
                 </div>
                 <div class="mt-3 d-flex justify-content-between"
                     :class="{'createInfo':!darkMode,'createInfo-dark': darkMode}">
                     <span>{{d.createTime}}</span>
-                    <span><i class="bi bi-person-circle"></i>{{d.createUser}}</span>
+                    <span><i class="bi bi-person-circle"></i>{{d.username}}</span>
                 </div>
             </router-link>
         </div>
@@ -58,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
-                    <img src="https://lyz0613.top/server/image/null2.png" class="cardImg rounded-3" alt="">
+                    <img src='../../public/image/暂无图片.png' class="cardImg rounded-3" alt="">
                 </div>
             </div>
             <p class="placeholder-glow justify-content-between d-flex mt-3">

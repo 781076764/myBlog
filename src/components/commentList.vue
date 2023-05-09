@@ -6,7 +6,7 @@
                 <div class="userInfo d-flex my-4" @mouseenter="showUserInfoCard(index)"
                     @mouseleave="hideUserInfoCard(index)" @click.stop="showUserInfoCard(index)">
                     <div class="userAvatar">
-                        <img :src="i.userAvatar ? i.userAvatar:'https://lyz0613.top/server/image/guest.png'"
+                        <img :src="i.userAvatar ? i.userAvatar:'../assets/image/guest.png'"
                             class="img-fluid" alt="">
                     </div>
                     <userInfoCard :showCard="userCard[index]==true?true:false" :userId="commentList[index].userid"

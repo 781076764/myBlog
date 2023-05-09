@@ -31,10 +31,9 @@
                 {{toolsData[0].text}}
             </div>
             <div class="img col-xl-5 align-self-center">
-                <!-- <img src="https://lyz0613.top/server/image/null2.png" class="img-fluid" alt=""> -->
                 <img :src="toolsData[0].imageSrc" class="img-fluid rounded-3" alt="" width="" height=""
                     v-if="toolsData[0].imageSrc != null">
-                <img src="https://lyz0613.top/server/image/null2.png" class="img-fluid rounded-3" alt="" width=""
+                <img src='../../public/image/暂无图片.png' class="img-fluid rounded-3" alt="" width=""
                     height="" v-else>
             </div>
         </div>

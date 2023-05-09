@@ -3,7 +3,7 @@
         v-if="isLogin">
         <div class="userInfo d-flex justify-content-center m-4">
             <div class="userAvatar" v-if="userInfo">
-                <img :src="userInfo.userAvatar ? userInfo.userAvatar:'https://lyz0613.top/server/image/guest.png'"
+                <img :src="userInfo.userAvatar ? userInfo.userAvatar:'../assets/image/guest.png'"
                     class="img-fluid" alt="">
             </div>
             <div class="userName align-self-center px-3" :class="{'text-dark':darkMode}">

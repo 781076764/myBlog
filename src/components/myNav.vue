@@ -45,17 +45,15 @@
         <!-- 个人信息按钮 -->
         <div class="nav-item loginIcon">
           <button class="nav-link nav-avatar-button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-            aria-controls="#offcanvasRight" :class="{ 'nav-link-dark': darkMode }">
-            <img v-if="isLogin"
-              :src="userInfo.userAvatar ? userInfo.userAvatar : 'https://lyz0613.top/server/image/guest.png'"
+            aria-controls="#offcanvasRight" :class="{ 'nav-link-dark': darkMode }" @click="handleOpenUserPage">
+            <img v-if="isLogin" :src="userInfo.userAvatar ? userInfo.userAvatar : '../../public/image/guest.png'"
               class="nav-avatar" />
             <i v-else class="iconfont icon-weidenglutouxiang"></i>
           </button>
         </div>
-        <div class="nav-item nav-submit-button dropdown" v-if="isLogin">
+        <div class="nav-item nav-submit-button dropdown" data-bs-auto-close="true" v-if="isLogin">
           <button class="nav-link" :class="{ 'nav-link-dark': darkMode }" data-bs-toggle="dropdown" aria-expanded="false"
-            data-bs-auto-close="outside" data-bs-auto-open="true"><i class="bi bi-arrow-bar-up"
-              style="margin: 0 5px;"></i>投稿</button>
+            data-bs-auto-close="true"><i class="bi bi-arrow-bar-up" style="margin: 0 5px;"></i>投稿</button>
           <div class="dropdown-menu p-3 rounded-3 shadow-lg" style="">
             <nav class="d-flex gap-2 col-8">
               <router-link :to="'/createPage?createType=' + 'article'" class="dropdown-item">
@@ -64,12 +62,12 @@
                   <strong class="d-block">投稿文章</strong>
                 </div>
               </router-link>
-              <router-link :to="'/createPage?createType=' + 'tool'"  class="dropdown-item">
+              <button :to="'/createPage?createType=' + 'tool'" class="dropdown-item" disabled>
                 <div class="align-items-center text-center">
                   <i class="bi bi-wrench-adjustable"></i>
                   <strong class="d-block">投稿工具</strong>
                 </div>
-              </router-link>
+              </button>
             </nav>
           </div>
         </div>
@@ -136,7 +134,7 @@
               class="bi bi-box-arrow-in-up"></i>更改背景</button>
           <div class="userAvatar">
             <a href="javascript:void(0)" @click="handleUpload('avatar')">
-              <img :src="userInfo.userAvatar ? userInfo.userAvatar : 'https://lyz0613.top/server/image/guest.png'"
+              <img :src="userInfo.userAvatar ? userInfo.userAvatar : '../../public/image/guest.png'"
                 class="img-fluid userAvatarImg" alt="">
               <span class="avatarOverlay" :class="{ 'text-dark': darkMode, 'text-body': !darkMode }">
                 上传头像
@@ -162,7 +160,40 @@
                 class="iconfont icon-tuichu"></i>退出登录</button>
           </div>
 
-          <div class="text-black-50 text-center" :class="{ 'text-dark': darkMode, 'text-body': !darkMode }">暂无发表文章</div>
+          <div v-if="userCreateList.length == 0" class="text-black-50 text-center"
+            :class="{ 'text-dark': darkMode, 'text-body': !darkMode }">暂无发表文章</div>
+          <div v-else>
+            <div class="text-black-50 text-center" :class="{ 'text-dark': darkMode, 'text-body': !darkMode }">发表的文章</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">标题</th>
+                  <th scope="col">时间</th>
+                  <th scope="col">状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in userCreateList" :key="index">
+                  <th scope="row">
+                    <div class="table-text">{{item.title}}</div>
+                  </th>
+                  <td>
+                    <div class="table-text">{{item.createTime}}</div>
+                  </td>
+                  <td class="d-flex align-items-center">
+                    <div v-if="item.status == 'process'" class="spinner-border spinner-border-sm text-primary" role="status">
+                      <span class="visually-hidden">{{item.status}}</span>
+                    </div>
+                    <i v-else-if="item.status == 'pass'" class="bi bi-check-lg text-success"></i>
+                    <i v-else class="bi bi-x-lg text-danger"></i>
+                    <div :class="item.status == 'process' ? 'text-primary' : item.status == 'pass' ? 'text-success' : 'text-danger'">
+                      {{ item.status == 'process' ? '审核中' : item.status == 'pass' ? '已通过' : '被驳回' }}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
 
@@ -199,6 +230,7 @@ export default {
       changeUserNameInput: '',
       uploadType: '', //当前上传文件的所属
       // darkMode: false //深色模式
+      userCreateList: []
     }
   },
   mounted() {
@@ -254,12 +286,23 @@ export default {
             this.userPassword = ''
             this.$store.commit('login', res.data.userInfo)
             this.$bus.emit("showMessage", '登录成功')
+            this.getUserCreateList()
           } else {
             this.loginError = true
           }
         })
         this.logining = false
       }, 1000)
+    },
+
+    //获取用户发表的文章列表
+    getUserCreateList() {
+      this.axios.get("getUserCreateList.php?session=" + this.$cookie.getCookie('session')).then((res) => {
+        this.userCreateList = res.data
+      })
+    },
+    handleOpenUserPage() {
+      this.getUserCreateList()
     },
 
     loginout() {
@@ -421,6 +464,7 @@ export default {
     margin: 0 1px !important;
   }
 }
+
 @media screen and (max-width: 520px) {
   .nav-item {
     margin: 10px 0 0 !important;
@@ -619,6 +663,15 @@ a:focus {
   opacity: 0.2;
 }
 
+.table-text {
+  /* 单行文本溢出 */
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 7rem;
+}
+
 .logout {
   position: fixed;
   bottom: 30px;
@@ -641,4 +694,5 @@ a:focus {
   position: absolute;
   bottom: 1rem;
   left: 1rem;
-}</style>
+}
+</style>

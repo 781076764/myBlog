@@ -26,8 +26,8 @@
                     :class="{'is-invalid': errorTips.text}"></textarea>
                 <label for="floatingInput">正文内容(发布后自动处理代码高亮)</label>
             </div>
-            <div class="image align-self-center col-lg-3 my-3">
-                <img :src="tempData.imageSrc == null || tempData.imageSrc == ''? 'https://lyz0613.top/server/image/null2.png': tempData.imageSrc"
+            <div class="image align-self-center col-lg-3 my-3 text-center">
+                <img :src="tempData.imageSrc == null || tempData.imageSrc == ''? '../../public/image/暂无图片.png' : tempData.imageSrc"
                     class="image">
                 <div class="m-3">
                     <input class="form-control form-control-sm" id="formFileSm" type="file" ref="upImgInput"

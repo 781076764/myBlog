@@ -68,7 +68,13 @@ const routes = [
                 name: 'editBlogComment',
                 path: 'editBlogComment',
                 component: () => import('../components/editBlogComment.vue')
-            }]
+            },
+            {
+                name: 'managerBlogCreate',
+                path: 'managerBlogCreate',
+                component: () => import('../components/managerBlogCreate.vue')
+            }
+            ]
         },
         {
             name: 'managerTools',

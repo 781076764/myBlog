@@ -30,7 +30,7 @@
                                 <label for="floatingInput">发布时间</label>
                             </div>
                             <div class="form-floating col-lg ms-lg-2 mt-2 mt-lg-0">
-                                <input type="text" class="form-control" placeholder="作者" v-model="d.createUser">
+                                <input type="text" class="form-control" placeholder="作者" v-model="d.username">
                                 <label for="floatingInput">作者</label>
                             </div>
                         </div>
@@ -40,8 +40,8 @@
                                     v-model="d.text"></textarea>
                                 <label for="floatingInput">正文内容</label>
                             </div>
-                            <div class="image align-self-center col-lg-3 my-3">
-                                <img :src="d.imageSrc == null || d.imageSrc == ''? 'https://lyz0613.top/server/image/null2.png': d.imageSrc"
+                            <div class="image align-self-center col-lg-3 my-3 text-center">
+                                <img :src="d.imageSrc == null || d.imageSrc == ''? '../../public/image/暂无图片.png': d.imageSrc"
                                     class="image" ref="showBlogImg">
                                 <div class="m-3">
                                     <input class="form-control form-control-sm" id="formFileSm" type="file"

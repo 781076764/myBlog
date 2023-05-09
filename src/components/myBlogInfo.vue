@@ -22,7 +22,7 @@
                     <span>{{blogData[0].createTime}}</span>
                 </div>
                 <div class="createUser px-4">
-                    <i class="bi bi-person-circle"></i><span>{{blogData[0].createUser}}</span>
+                    <i class="bi bi-person-circle"></i><span>{{blogData[0].username}}</span>
                 </div>
             </div>
         </div>
@@ -31,10 +31,10 @@
                 <highlightjs :code="code" />
             </div>
             <div class="img col-lg-3 align-self-center">
-                <!-- <img src="https://lyz0613.top/server/image/null2.png" class="img-fluid" alt=""> -->
+                <!-- <img src="https://lyz0613.top/server/image/.png" class="img-fluid" alt=""> -->
                 <img :src="blogData[0].imageSrc" class="img-fluid rounded-3" alt="" width="" height=""
                     v-if="blogData[0].imageSrc != null && blogData[0].imageSrc != ''">
-                <img src="https://lyz0613.top/server/image/null2.png" class="img-fluid rounded-3" alt="" width=""
+                <img src='../../public/image/暂无图片.png' class="img-fluid rounded-3" alt="" width=""
                     height="" v-else>
             </div>
         </div>
